@@ -1,0 +1,215 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="theme-color" content="#78cf16">
+  <meta name="description" content="Official training access page. Open the training portal to book your training slot.">
+  <title>Training Portal | Training Centre</title>
+  <style>
+    :root {
+      --green: #78cf16;
+      --green-dark: #397b0b;
+      --ink: #172414;
+      --muted: #667260;
+      --line: rgba(38, 69, 25, .12);
+      --glass: rgba(255, 255, 255, .82);
+    }
+    * { box-sizing: border-box; }
+    html { min-height: 100%; }
+    body {
+      margin: 0;
+      min-height: 100vh;
+      font-family: Inter, "Segoe UI", Arial, sans-serif;
+      color: var(--ink);
+      background:
+        radial-gradient(ellipse at 12% 8%, rgba(120, 207, 22, .20), transparent 35%),
+        radial-gradient(ellipse at 90% 90%, rgba(120, 207, 22, .15), transparent 32%),
+        linear-gradient(135deg, #f8fcf4 0%, #edf6e7 48%, #f9fbf7 100%);
+      display: flex;
+      flex-direction: column;
+      overflow-x: hidden;
+    }
+    .topbar {
+      width: min(1120px, calc(100% - 40px));
+      margin: 0 auto;
+      padding: 25px 0;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 16px;
+    }
+    .brand { display: flex; align-items: center; gap: 12px; }
+    .brand-mark {
+      width: 44px; height: 44px; border-radius: 14px;
+      display: grid; place-items: center;
+      background: linear-gradient(145deg, #9be63d, #66bc0b);
+      box-shadow: 0 8px 20px rgba(88, 155, 20, .20);
+      color: #17300b;
+    }
+    .brand-name { font-weight: 800; letter-spacing: -.03em; font-size: 15px; }
+    .brand-sub { color: var(--muted); font-size: 11px; margin-top: 3px; letter-spacing: .09em; text-transform: uppercase; }
+    .status {
+      display: inline-flex; align-items: center; gap: 8px;
+      border: 1px solid var(--line); background: rgba(255,255,255,.6);
+      padding: 9px 12px; border-radius: 999px; color: #45613a;
+      font-size: 12px; font-weight: 650;
+    }
+    .status-dot { width: 7px; height: 7px; border-radius: 50%; background: #63b80e; box-shadow: 0 0 0 4px rgba(120,207,22,.14); }
+    main {
+      flex: 1; display: grid; place-items: center;
+      padding: 26px 20px 70px;
+    }
+    .layout {
+      width: min(1020px, 100%);
+      display: grid; grid-template-columns: 1.08fr .92fr;
+      align-items: center; gap: clamp(30px, 6vw, 76px);
+    }
+    .eyebrow {
+      display: inline-flex; align-items: center; gap: 8px;
+      color: var(--green-dark); background: rgba(120,207,22,.12);
+      border: 1px solid rgba(94,159,24,.16);
+      padding: 8px 12px; border-radius: 999px;
+      font-size: 11px; font-weight: 800; letter-spacing: .12em; text-transform: uppercase;
+    }
+    h1 {
+      font-size: clamp(38px, 5.3vw, 62px); line-height: 1.04;
+      letter-spacing: -.055em; margin: 22px 0 18px; max-width: 590px;
+    }
+    h1 span { color: var(--green-dark); }
+    .intro { font-size: clamp(15px, 1.7vw, 18px); line-height: 1.75; color: #5d6957; max-width: 510px; margin: 0 0 28px; }
+    .primary {
+      appearance: none; border: 0; cursor: pointer; text-decoration: none;
+      display: inline-flex; justify-content: center; align-items: center; gap: 12px;
+      min-height: 58px; padding: 0 23px; border-radius: 16px;
+      background: linear-gradient(135deg, #8be12b, #69c20d);
+      color: #17300b; font-size: 15px; font-weight: 800;
+      box-shadow: 0 12px 25px rgba(87, 157, 18, .22), inset 0 1px 0 rgba(255,255,255,.45);
+      transition: transform .18s ease, box-shadow .18s ease;
+    }
+    .primary:hover { transform: translateY(-2px); box-shadow: 0 16px 30px rgba(87,157,18,.27); }
+    .primary:focus-visible { outline: 3px solid #315f0d; outline-offset: 4px; }
+    .hint { display: flex; gap: 8px; align-items: center; color: #74806d; font-size: 12px; margin-top: 16px; }
+    .visual {
+      position: relative; min-height: 400px; display: grid; place-items: center;
+    }
+    .orb {
+      position: absolute; width: 310px; height: 310px; border-radius: 50%;
+      background: radial-gradient(circle at 32% 28%, rgba(176,240,112,.76), rgba(120,207,22,.12) 62%, transparent 70%);
+      filter: blur(1px);
+    }
+    .panel {
+      position: relative; width: min(100%, 360px); padding: 27px;
+      border: 1px solid rgba(255,255,255,.9); border-radius: 28px;
+      background: var(--glass); backdrop-filter: blur(18px);
+      box-shadow: 0 28px 75px rgba(46, 76, 32, .12), 0 3px 12px rgba(46,76,32,.04);
+      transform: rotate(1.5deg);
+    }
+    .panel-top { display: flex; justify-content: space-between; align-items: center; margin-bottom: 28px; }
+    .panel-label { color: #788371; text-transform: uppercase; letter-spacing: .13em; font-size: 10px; font-weight: 800; }
+    .panel-icon { display: grid; place-items: center; width: 40px; height: 40px; border-radius: 13px; background: #e7f8d8; color: #397b0b; }
+    .panel h2 { margin: 0 0 8px; font-size: 25px; letter-spacing: -.04em; }
+    .panel p { margin: 0; color: #697563; line-height: 1.6; font-size: 13px; }
+    .steps { margin-top: 25px; display: grid; gap: 12px; }
+    .step { display: flex; align-items: center; gap: 12px; background: rgba(246,250,242,.92); border: 1px solid #edf2e8; padding: 12px; border-radius: 14px; }
+    .step-num { flex: 0 0 30px; height: 30px; border-radius: 10px; display: grid; place-items: center; background: #e1f5d0; color: #397b0b; font-weight: 800; font-size: 12px; }
+    .step strong { display: block; font-size: 12px; margin-bottom: 3px; }
+    .step small { display: block; color: #778170; font-size: 11px; }
+    footer {
+      width: min(1120px, calc(100% - 40px)); margin: 0 auto;
+      padding: 18px 0 24px; border-top: 1px solid rgba(38,69,25,.09);
+      display: flex; justify-content: space-between; gap: 12px; flex-wrap: wrap;
+      color: #7a8574; font-size: 11px;
+    }
+    .footer-right { display: inline-flex; gap: 7px; align-items: center; }
+    @media (max-width: 760px) {
+      .topbar { width: min(100% - 32px, 560px); padding: 18px 0; }
+      .status { font-size: 10px; padding: 8px 10px; }
+      main { padding: 30px 20px 42px; }
+      .layout { grid-template-columns: 1fr; gap: 20px; max-width: 540px; }
+      h1 { font-size: clamp(39px, 10vw, 54px); margin-top: 19px; }
+      .intro { font-size: 15px; }
+      .primary { width: 100%; }
+      .visual { min-height: auto; padding: 12px 0 16px; }
+      .orb { width: 250px; height: 250px; }
+      .panel { transform: none; padding: 22px; }
+      footer { width: calc(100% - 32px); }
+    }
+    @media (prefers-reduced-motion: reduce) { *, *::before, *::after { transition: none !important; } }
+  </style>
+</head>
+<body>
+  <header class="topbar">
+    <div class="brand">
+      <div class="brand-mark" aria-hidden="true">
+        <svg width="25" height="25" viewBox="0 0 24 24" fill="none">
+          <path d="M5 18V6h3.2l3.8 5 3.8-5H19v12h-3V10.7l-4 5-4-5V18H5Z" fill="currentColor"/>
+        </svg>
+      </div>
+      <div>
+        <div class="brand-name">TRAINING CENTRE</div>
+        <div class="brand-sub">Learning · Safety · Excellence</div>
+      </div>
+    </div>
+    <div class="status"><span class="status-dot"></span> Digital Training Portal</div>
+  </header>
+
+  <main>
+    <div class="layout">
+      <section>
+        <div class="eyebrow">
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="m12 3 2.7 5.5 6.1.9-4.4 4.3 1 6.1-5.4-2.9-5.4 2.9 1-6.1-4.4-4.3 6.1-.9L12 3Z" stroke="currentColor" stroke-width="1.7" stroke-linejoin="round"/></svg>
+          Your training starts here
+        </div>
+        <h1>Make time for <span>safer work.</span></h1>
+        <p class="intro">Access the training portal to book your training slot. The process is simple, mobile-friendly, and designed to help you get started quickly.</p>
+        <a class="primary" href="https://script.google.com/macros/s/AKfycbwF8kaUKPxajQdBIDMLLjPWK4vdA5_Y_yI2DHiqZYtdwymYK37oXAE4eYmitOdDsIjf/exec" target="_blank" rel="noopener noreferrer" aria-label="Open the training booking portal">
+          Book Your Training Slot
+          <svg width="19" height="19" viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M5 12h13M13 6l6 6-6 6" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+        </a>
+        <div class="hint">
+          <svg width="15" height="15" viewBox="0 0 24 24" fill="none" aria-hidden="true"><rect x="5" y="10" width="14" height="11" rx="2" stroke="currentColor" stroke-width="1.7"/><path d="M8 10V7a4 4 0 0 1 8 0v3" stroke="currentColor" stroke-width="1.7" stroke-linecap="round"/></svg>
+          Secure connection · Opens the booking portal in a new tab
+        </div>
+      </section>
+
+      <aside class="visual" aria-label="How to use the training portal">
+        <div class="orb"></div>
+        <div class="panel">
+          <div class="panel-top">
+            <div class="panel-label">Quick access</div>
+            <div class="panel-icon">
+              <svg width="21" height="21" viewBox="0 0 24 24" fill="none" aria-hidden="true"><rect x="3" y="5" width="18" height="16" rx="2" stroke="currentColor" stroke-width="1.8"/><path d="M16 3v4M8 3v4M3 10h18" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/></svg>
+            </div>
+          </div>
+          <h2>Ready to book?</h2>
+          <p>Use these simple steps to access your training booking page.</p>
+          <div class="steps">
+            <div class="step">
+              <div class="step-num">01</div>
+              <div><strong>Open the portal</strong><small>Tap the green booking button</small></div>
+            </div>
+            <div class="step">
+              <div class="step-num">02</div>
+              <div><strong>Enter your details</strong><small>Follow the instructions on screen</small></div>
+            </div>
+            <div class="step">
+              <div class="step-num">03</div>
+              <div><strong>Complete your booking</strong><small>Review your information before submitting</small></div>
+            </div>
+          </div>
+        </div>
+      </aside>
+    </div>
+  </main>
+
+  <footer>
+    <div>© <span id="year"></span> Training Centre · Digital Access Page</div>
+    <div class="footer-right">
+      <svg width="13" height="13" viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M12 3 19 6v5c0 4.7-3 8-7 10-4-2-7-5.3-7-10V6l7-3Z" stroke="currentColor" stroke-width="1.7" stroke-linejoin="round"/></svg>
+      Work safely. Learn continuously.
+    </div>
+  </footer>
+  <script>document.getElementById("year").textContent = new Date().getFullYear();</script>
+</body>
+</html>
