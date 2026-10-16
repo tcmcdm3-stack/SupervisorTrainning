@@ -1,566 +1,191 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <meta name="theme-color" content="#7CD902">
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="theme-color" content="#1b5fa8">
+<title>Training Centre</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Noto+Sans+Devanagari:wght@400;500;600&display=swap" rel="stylesheet">
+<script>try{if((navigator.hardwareConcurrency||8)<=4||(navigator.deviceMemory||8)<=4)document.documentElement.classList.add('lite');}catch(e){}</script>
+<style>
+:root{
+  --ink:#0b2545;--mut:#45607c;--pri:#1b5fa8;--pri2:#0e3f7a;--teal:#1f9d8f;
+  --panel:linear-gradient(135deg,rgba(255,255,255,.64) 0%,rgba(255,255,255,.28) 100%);
+  --edge:rgba(255,255,255,.75);
+  --tile:linear-gradient(135deg,rgba(255,255,255,.78),rgba(255,255,255,.46));
+  --spot:rgba(255,255,255,.9);
+  --tag-bg:rgba(27,95,168,.12);--tag-ink:#0e3f7a;
+  --shade:linear-gradient(180deg,rgba(255,255,255,.34),rgba(236,246,252,.06) 42%,rgba(205,228,243,.3));
+  --sh:0 24px 70px rgba(8,28,55,.2);
+}
+@media(prefers-color-scheme:dark){:root{
+  --ink:#e9f1f9;--mut:#a8bdd2;
+  --panel:linear-gradient(135deg,rgba(42,74,112,.66) 0%,rgba(12,26,46,.52) 100%);
+  --edge:rgba(255,255,255,.2);
+  --tile:linear-gradient(135deg,rgba(255,255,255,.12),rgba(255,255,255,.05));
+  --spot:rgba(150,200,255,.28);
+  --tag-bg:rgba(120,180,235,.18);--tag-ink:#cfe6fb;
+  --shade:linear-gradient(180deg,rgba(4,14,28,.8),rgba(4,14,28,.62));
+  --sh:0 24px 70px rgba(0,0,0,.5);
+}}
+*{box-sizing:border-box}
+html{-webkit-text-size-adjust:100%}
+body{margin:0;min-height:100vh;min-height:100dvh;font-family:'Inter',system-ui,-apple-system,'Segoe UI',Roboto,sans-serif;color:var(--ink);background:#cfe3f1;overflow-x:hidden;-webkit-font-smoothing:antialiased}
+.hi{font-family:'Noto Sans Devanagari','Inter',sans-serif}
 
-  <title>Training Centre | Portal</title>
+/* background: your refinery photo, with a soft gradient if the image file is missing */
+.bg{position:fixed;inset:0;z-index:-3;background:url("refinery.jpg") 72% center/cover no-repeat,linear-gradient(135deg,#cfe6f7,#a9d3ee 45%,#bfe9df);animation:fadein 1s ease both}
+.bg:after{content:"";position:absolute;inset:0;background:var(--shade)}
+.aur{position:fixed;inset:0;z-index:-2;pointer-events:none;overflow:hidden;transform:translate3d(var(--px,0px),var(--py,0px),0);transition:transform .6s ease-out}
+.aur i{position:absolute;border-radius:50%;will-change:transform}
+.aur i:nth-child(1){width:55vmax;height:55vmax;left:-16vmax;top:-20vmax;background:radial-gradient(circle,rgba(70,190,250,.6),rgba(70,190,250,0) 64%);animation:o1 26s ease-in-out infinite alternate}
+.aur i:nth-child(2){width:48vmax;height:48vmax;right:-14vmax;bottom:-18vmax;background:radial-gradient(circle,rgba(40,210,160,.5),rgba(40,210,160,0) 64%);animation:o2 32s ease-in-out infinite alternate}
+.aur i:nth-child(3){width:34vmax;height:34vmax;right:8%;top:4%;background:radial-gradient(circle,rgba(255,205,120,.46),rgba(255,205,120,0) 64%);animation:o3 38s ease-in-out infinite alternate}
+@keyframes o1{to{transform:translate3d(14vmax,10vmax,0) scale(1.15)}}
+@keyframes o2{to{transform:translate3d(-16vmax,-8vmax,0) scale(1.1)}}
+@keyframes o3{to{transform:translate3d(-20vmax,14vmax,0) scale(.9)}}
+@keyframes fadein{from{opacity:0}}
+@keyframes rise{from{opacity:0;transform:translateY(18px) scale(.985)}}
+@keyframes shine{0%,60%{transform:translateX(-140%) skewX(-16deg)}100%{transform:translateX(420%) skewX(-16deg)}}
+@keyframes ripple{to{transform:scale(1);opacity:0}}
 
-  <style>
-    :root {
-      --green: #7CD902;
-      --green-dark: #397b0b;
-      --ink: #172414;
-      --muted: #687564;
-      --glass: rgba(255, 255, 255, 0.62);
-      --border: rgba(255, 255, 255, 0.88);
-    }
+main{min-height:100vh;min-height:100dvh;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:clamp(26px,4.5vw,44px);padding:clamp(28px,6vw,64px) 18px calc(clamp(28px,6vw,64px) + env(safe-area-inset-bottom))}
 
-    * {
-      box-sizing: border-box;
-    }
+.hello{text-align:center;max-width:640px;animation:rise .8s .05s cubic-bezier(.2,.8,.2,1) both}
+.hello h1{margin:0;font-size:clamp(36px,7vw,62px);font-weight:800;letter-spacing:-.045em;line-height:1.04;background:linear-gradient(120deg,var(--ink) 15%,var(--pri) 62%,var(--teal));-webkit-background-clip:text;background-clip:text;color:transparent}
+.hello p{margin:14px 0 0;color:var(--mut);font-size:clamp(14.5px,2.1vw,17px);line-height:1.55}
+.hello p small{display:block;margin-top:4px;font-size:.84em;opacity:.9}
 
-    body {
-      margin: 0;
-      min-height: 100vh;
-      font-family: "Inter", "Segoe UI", Arial, sans-serif;
-      color: var(--ink);
-      background:
-        radial-gradient(ellipse at 12% 10%,
-          rgba(124, 217, 2, 0.25), transparent 38%),
-        radial-gradient(ellipse at 90% 85%,
-          rgba(124, 217, 2, 0.18), transparent 35%),
-        linear-gradient(135deg, #f7fcf2, #eaf5df, #fbfdf8);
-      display: flex;
-      flex-direction: column;
-      position: relative;
-    }
+.grid{width:min(960px,100%);display:grid;grid-template-columns:1fr 1fr;gap:20px}
+.panel{position:relative;padding:22px;border-radius:28px;background:var(--panel);-webkit-backdrop-filter:blur(22px) saturate(175%);backdrop-filter:blur(22px) saturate(175%);border:1px solid var(--edge);box-shadow:var(--sh),inset 0 1px 0 rgba(255,255,255,.9);overflow:hidden;animation:rise .85s cubic-bezier(.2,.8,.2,1) both}
+.panel:nth-child(1){animation-delay:.2s}.panel:nth-child(2){animation-delay:.32s}
+.panel:after{content:"";position:absolute;top:-30%;bottom:-30%;left:0;width:34%;background:linear-gradient(100deg,rgba(255,255,255,0),rgba(255,255,255,.4),rgba(255,255,255,0));transform:translateX(-140%) skewX(-16deg);animation:shine 9s 1.8s ease-in-out infinite;pointer-events:none}
+.ph{display:flex;align-items:center;justify-content:space-between;gap:10px;margin:0 0 4px}
+.ph h2{margin:0;font-size:19px;font-weight:700;letter-spacing:-.02em}
+.tag{display:inline-flex;align-items:center;gap:6px;padding:5px 11px;border-radius:999px;background:var(--tag-bg);color:var(--tag-ink);font-size:12px;font-weight:600;white-space:nowrap}
+.tag svg{width:13px;height:13px}
+.pd{margin:0 0 6px;color:var(--mut);font-size:13.5px}
 
-    /* Subtle dot pattern */
-    body::before {
-      content: '';
-      position: fixed;
-      top: 0;
-      left: 0;
-      width: 100%;
-      height: 100%;
-      background-image: radial-gradient(circle, rgba(120, 130, 120, 0.08) 1px, transparent 1px);
-      background-size: 32px 32px;
-      pointer-events: none;
-      z-index: 0;
-    }
+.tile{position:relative;display:flex;align-items:center;gap:15px;margin-top:12px;padding:16px;border-radius:20px;text-decoration:none;color:inherit;overflow:hidden;
+  background-color:transparent;
+  background-image:radial-gradient(280px circle at var(--mx,50%) var(--my,-70%),var(--spot),rgba(255,255,255,0) 62%),var(--tile);
+  border:1px solid var(--edge);box-shadow:0 8px 22px rgba(8,28,55,.1),inset 0 1px 0 rgba(255,255,255,.9);
+  transition:transform .28s cubic-bezier(.2,.8,.2,1),box-shadow .28s ease,border-color .28s;touch-action:manipulation;-webkit-tap-highlight-color:transparent;
+  animation:rise .8s cubic-bezier(.2,.8,.2,1) both}
+.panel .tile:nth-of-type(1){animation-delay:.45s}.panel .tile:nth-of-type(2){animation-delay:.55s}
+.panel:nth-child(2) .tile:nth-of-type(1){animation-delay:.58s}.panel:nth-child(2) .tile:nth-of-type(2){animation-delay:.68s}
+.tile:hover{transform:translateY(-4px);box-shadow:0 20px 44px rgba(8,28,55,.2),inset 0 1px 0 #fff;border-color:rgba(255,255,255,.98)}
+.tile:active{transform:translateY(-1px) scale(.99)}
+.tile:focus-visible{outline:3px solid var(--pri);outline-offset:3px}
+.ico{flex:none;width:52px;height:52px;border-radius:15px;display:grid;place-items:center;color:#fff;background:linear-gradient(135deg,#2f7fd0,#0e3f7a);box-shadow:0 8px 18px rgba(14,63,122,.35),inset 0 1px 0 rgba(255,255,255,.3);transition:transform .3s cubic-bezier(.2,.8,.2,1)}
+.ico svg{width:24px;height:24px}
+.teal .ico{background:linear-gradient(135deg,#2cc0ab,#12756c);box-shadow:0 8px 18px rgba(18,117,108,.35),inset 0 1px 0 rgba(255,255,255,.3)}
+.tile:hover .ico{transform:scale(1.08) rotate(-4deg)}
+.txt{flex:1;min-width:0}
+.txt b{display:block;font-size:15.5px;font-weight:700;letter-spacing:-.01em;line-height:1.3}
+.txt span{display:block;margin-top:3px;font-size:13px;line-height:1.4;color:var(--mut)}
+.txt .hi{margin-top:2px;font-size:12.5px}
+.go{flex:none;width:34px;height:34px;border-radius:50%;display:grid;place-items:center;background:rgba(27,95,168,.12);color:var(--pri);transition:transform .3s cubic-bezier(.2,.8,.2,1),background .25s,color .25s}
+.go svg{width:16px;height:16px}
+.tile:hover .go{transform:translateX(4px);background:var(--pri);color:#fff}
+.rip{position:absolute;border-radius:50%;background:rgba(27,95,168,.18);transform:scale(0);animation:ripple .65s ease-out forwards;pointer-events:none}
 
-    .topbar {
-      width: min(1050px, calc(100% - 36px));
-      margin: auto;
-      padding: 30px 0;
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      gap: 12px;
-      position: relative;
-      z-index: 10;
-    }
+.foot{color:var(--mut);font-size:13px;text-align:center;animation:rise .8s .85s both}
 
-    /* Minimal glass pill header */
-    .brand-pill {
-      display: inline-flex;
-      align-items: center;
-      gap: 10px;
-      padding: 14px 32px;
-      background: rgba(255, 255, 255, 0.75);
-      backdrop-filter: blur(20px);
-      -webkit-backdrop-filter: blur(20px);
-      border: 1px solid rgba(255, 255, 255, 0.9);
-      border-radius: 50px;
-      box-shadow:
-        0 4px 20px rgba(0, 0, 0, 0.04),
-        0 1px 3px rgba(0, 0, 0, 0.02),
-        inset 0 1px 0 rgba(255, 255, 255, 0.9);
-      transition: all 0.3s ease;
-    }
-
-    .brand-pill:hover {
-      transform: translateY(-2px);
-      box-shadow:
-        0 8px 30px rgba(0, 0, 0, 0.06),
-        0 2px 6px rgba(0, 0, 0, 0.03),
-        inset 0 1px 0 rgba(255, 255, 255, 0.95);
-      background: rgba(255, 255, 255, 0.85);
-    }
-
-    .brand-icon {
-      width: 28px;
-      height: 28px;
-      display: grid;
-      place-items: center;
-      border-radius: 8px;
-      background: linear-gradient(145deg, #a8f34e, #70c900);
-      color: #19300c;
-      font-weight: 700;
-      font-size: 14px;
-      box-shadow: 0 2px 8px rgba(112, 201, 0, 0.25);
-    }
-
-    .brand-name {
-      font-size: 15px;
-      font-weight: 600;
-      letter-spacing: -0.01em;
-      color: var(--ink);
-    }
-
-    .status {
-      position: absolute;
-      right: 0;
-      padding: 8px 14px;
-      border: 1px solid rgba(255, 255, 255, 0.8);
-      border-radius: 20px;
-      background: rgba(255, 255, 255, 0.5);
-      backdrop-filter: blur(10px);
-      font-size: 11px;
-      font-weight: 600;
-      color: #42622d;
-      white-space: nowrap;
-      display: flex;
-      align-items: center;
-      gap: 6px;
-    }
-
-    .status-dot {
-      display: inline-block;
-      width: 6px;
-      height: 6px;
-      border-radius: 50%;
-      background: #64bd08;
-      box-shadow: 0 0 0 3px rgba(124, 217, 2, 0.15);
-      animation: pulse 2s ease-in-out infinite;
-    }
-
-    @keyframes pulse {
-      0%, 100% { opacity: 1; transform: scale(1); }
-      50% { opacity: 0.6; transform: scale(1.1); }
-    }
-
-    main {
-      flex: 1;
-      display: grid;
-      place-items: center;
-      padding: 25px 20px 55px;
-      position: relative;
-      z-index: 1;
-    }
-
-    .container {
-      width: min(920px, 100%);
-      display: grid;
-      grid-template-columns: 1fr 0.88fr;
-      align-items: center;
-      gap: 55px;
-    }
-
-    .eyebrow {
-      display: inline-flex;
-      align-items: center;
-      gap: 8px;
-      padding: 8px 16px;
-      border: 1px solid rgba(255, 255, 255, 0.8);
-      border-radius: 30px;
-      background: rgba(255, 255, 255, 0.6);
-      backdrop-filter: blur(10px);
-      color: var(--green-dark);
-      font-size: 11px;
-      font-weight: 700;
-      letter-spacing: 0.08em;
-      text-transform: uppercase;
-      box-shadow: 0 2px 8px rgba(0, 0, 0, 0.03);
-    }
-
-    h1 {
-      margin: 23px 0 12px;
-      font-size: clamp(40px, 5vw, 60px);
-      line-height: 1.04;
-      letter-spacing: -0.055em;
-      font-weight: 700;
-    }
-
-    h1 span {
-      color: var(--green-dark);
-    }
-
-    .subtitle {
-      margin: 0;
-      color: var(--muted);
-      font-size: 16px;
-      line-height: 1.7;
-      font-weight: 400;
-    }
-
-    .glass-card {
-      padding: 32px;
-      border: 1px solid rgba(255, 255, 255, 0.9);
-      border-radius: 24px;
-      background: rgba(255, 255, 255, 0.65);
-      backdrop-filter: blur(24px);
-      -webkit-backdrop-filter: blur(24px);
-      box-shadow:
-        0 25px 65px rgba(43, 75, 28, 0.08),
-        0 8px 20px rgba(0, 0, 0, 0.03),
-        inset 0 1px 0 rgba(255, 255, 255, 0.9);
-    }
-
-    .card-heading {
-      margin: 0 0 7px;
-      font-size: 22px;
-      letter-spacing: -0.02em;
-      font-weight: 700;
-    }
-
-    .card-subtitle {
-      margin: 0 0 28px;
-      color: var(--muted);
-      font-size: 13px;
-      font-weight: 400;
-    }
-
-    .buttons {
-      display: grid;
-      gap: 14px;
-    }
-
-    .portal-btn {
-      position: relative;
-      display: flex;
-      align-items: center;
-      gap: 14px;
-      width: 100%;
-      min-height: 72px;
-      padding: 16px 18px;
-      border: 1px solid rgba(255, 255, 255, 0.95);
-      border-radius: 16px;
-      background: rgba(255, 255, 255, 0.7);
-      color: var(--ink);
-      text-decoration: none;
-      box-shadow:
-        0 4px 12px rgba(44, 69, 32, 0.04),
-        inset 0 1px 0 rgba(255, 255, 255, 0.95);
-      transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
-      overflow: hidden;
-    }
-
-    .portal-btn::before {
-      content: '';
-      position: absolute;
-      top: 0;
-      left: 0;
-      right: 0;
-      bottom: 0;
-      background: linear-gradient(135deg, rgba(255,255,255,0.4), transparent);
-      opacity: 0;
-      transition: opacity 0.3s ease;
-    }
-
-    .portal-btn:hover::before {
-      opacity: 1;
-    }
-
-    .portal-btn:hover {
-      transform: translateY(-3px);
-      background: rgba(255, 255, 255, 0.95);
-      box-shadow: 
-        0 12px 28px rgba(44, 69, 32, 0.08),
-        0 4px 10px rgba(0, 0, 0, 0.03);
-    }
-
-    .portal-btn:focus-visible {
-      outline: 3px solid var(--green);
-      outline-offset: 3px;
-    }
-
-    .portal-btn.primary {
-      background: linear-gradient(135deg, rgba(165, 237, 80, 0.15), rgba(124, 217, 2, 0.1));
-      border-color: rgba(124, 217, 2, 0.3);
-      box-shadow:
-        0 8px 20px rgba(124, 217, 2, 0.12),
-        inset 0 1px 0 rgba(255, 255, 255, 0.8);
-    }
-
-    .portal-btn.primary:hover {
-      background: linear-gradient(135deg, rgba(165, 237, 80, 0.25), rgba(124, 217, 2, 0.15));
-      box-shadow:
-        0 12px 30px rgba(124, 217, 2, 0.18),
-        0 4px 10px rgba(0, 0, 0, 0.03);
-    }
-
-    .btn-icon {
-      flex: 0 0 44px;
-      height: 44px;
-      display: grid;
-      place-items: center;
-      border-radius: 12px;
-      background: rgba(124, 217, 2, 0.1);
-      color: var(--green-dark);
-      transition: all 0.3s ease;
-    }
-
-    .primary .btn-icon {
-      background: rgba(124, 217, 2, 0.2);
-      box-shadow: 0 2px 8px rgba(124, 217, 2, 0.15);
-    }
-
-    .portal-btn:hover .btn-icon {
-      transform: scale(1.05);
-      background: rgba(124, 217, 2, 0.2);
-    }
-
-    .btn-icon svg {
-      width: 22px;
-      height: 22px;
-    }
-
-    .btn-text {
-      flex: 1;
-      min-width: 0;
-    }
-
-    .btn-title {
-      display: block;
-      font-size: 14px;
-      font-weight: 700;
-      line-height: 1.4;
-      letter-spacing: -0.01em;
-    }
-
-    .btn-sub {
-      display: block;
-      margin-top: 3px;
-      color: #687564;
-      font-size: 12px;
-      line-height: 1.4;
-      font-weight: 400;
-    }
-
-    .arrow {
-      color: var(--green-dark);
-      font-size: 20px;
-      font-weight: 500;
-      opacity: 0.7;
-      transition: all 0.3s ease;
-    }
-
-    .portal-btn:hover .arrow {
-      opacity: 1;
-      transform: translateX(3px);
-    }
-
-    footer {
-      width: min(1050px, calc(100% - 36px));
-      margin: auto;
-      padding: 20px 0 24px;
-      border-top: 1px solid rgba(38, 69, 25, 0.06);
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      gap: 10px;
-      flex-wrap: wrap;
-      color: #75816e;
-      font-size: 12px;
-      position: relative;
-      z-index: 1;
-    }
-
-    @media (max-width: 720px) {
-      .topbar {
-        padding: 20px 0;
-      }
-
-      .brand-pill {
-        padding: 12px 24px;
-      }
-
-      .status {
-        position: static;
-        font-size: 10px;
-        padding: 7px 12px;
-      }
-
-      main {
-        padding: 25px 18px 38px;
-      }
-
-      .container {
-        max-width: 470px;
-        grid-template-columns: 1fr;
-        gap: 30px;
-      }
-
-      h1 {
-        margin-top: 17px;
-        font-size: clamp(40px, 10vw, 54px);
-      }
-
-      .subtitle {
-        font-size: 15px;
-      }
-
-      .glass-card {
-        padding: 26px;
-        border-radius: 20px;
-      }
-
-      .portal-btn {
-        min-height: 70px;
-        padding: 15px 16px;
-      }
-    }
-
-    @media (max-width: 380px) {
-      .brand-pill {
-        padding: 11px 20px;
-      }
-
-      .brand-name {
-        font-size: 14px;
-      }
-
-      .status {
-        max-width: 120px;
-        white-space: normal;
-        text-align: center;
-      }
-    }
-
-    @media (prefers-reduced-motion: reduce) {
-      *, *::before, *::after {
-        transition: none !important;
-        animation: none !important;
-      }
-    }
-  </style>
+@media(max-width:820px){
+  .grid{grid-template-columns:1fr;max-width:480px}
+  .panel{padding:18px;border-radius:24px}
+  .aur i{animation:none}
+  .panel:after{display:none}
+  .panel{-webkit-backdrop-filter:blur(16px) saturate(165%);backdrop-filter:blur(16px) saturate(165%)}
+  .bg{background-position:84% center,center}
+}
+@media(max-width:380px){.tile{padding:13px;gap:12px}.ico{width:46px;height:46px}.txt b{font-size:14.5px}}
+html.lite .aur i{animation:none}
+html.lite .panel{-webkit-backdrop-filter:blur(10px);backdrop-filter:blur(10px)}
+html.lite .panel:after{display:none}
+@media(prefers-reduced-motion:reduce){*,*:before,*:after{animation:none!important;transition:none!important}}
+</style>
 </head>
-
 <body>
+<div class="bg" aria-hidden="true"></div>
+<div class="aur" aria-hidden="true"><i></i><i></i><i></i></div>
 
-  <header class="topbar">
-    <div class="brand-pill">
-      <div class="brand-icon" aria-hidden="true">T</div>
-      <div class="brand-name">Training Portal</div>
-    </div>
-    
-    <div class="status">
-      <span class="status-dot"></span>
-      <span>Online</span>
-    </div>
+<main>
+  <header class="hello">
+    <h1 id="greet">Welcome</h1>
+    <p>Choose how you would like to continue.<small class="hi" lang="hi">आगे बढ़ने के लिए चुनें</small></p>
   </header>
 
-  <main>
-    <div class="container">
+  <section class="grid">
 
-      <section>
-        <div class="eyebrow">
-          <span>✦</span> Welcome
-        </div>
+    <!-- STAFF: these two need a login -->
+    <article class="panel">
+      <div class="ph"><h2>Staff</h2>
+        <span class="tag"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="4" y="10" width="16" height="11" rx="2"/><path d="M8 10V7a4 4 0 0 1 8 0v3"/></svg>Sign-in required</span></div>
+      <p class="pd">For administrators and trainers.</p>
 
-        <h1>One portal.<br><span>Easy access.</span></h1>
+      <a class="tile" href="https://script.google.com/macros/s/AKfycbwF8kaUKPxajQdBIDMLLjPWK4vdA5_Y_yI2DHiqZYtdwymYK37oXAE4eYmitOdDsIjf/exec" target="_blank" rel="noopener noreferrer">
+        <span class="ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/><polyline points="9 12 11 14 15 10"/></svg></span>
+        <span class="txt"><b>Admin</b><span>Slots, candidates, reports and settings</span></span>
+        <span class="go"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg></span>
+      </a>
 
-        <p class="subtitle">
-          Access your training services in one place. Simple, secure, and streamlined for your convenience.
-        </p>
-      </section>
+      <a class="tile" href="https://script.google.com/macros/s/AKfycbwF8kaUKPxajQdBIDMLLjPWK4vdA5_Y_yI2DHiqZYtdwymYK37oXAE4eYmitOdDsIjf/exec?page=trainer" target="_blank" rel="noopener noreferrer">
+        <span class="ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><polyline points="16 11 18 13 22 9"/></svg></span>
+        <span class="txt"><b>Trainer</b><span>Today's nominees, attendance and test marks</span></span>
+        <span class="go"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg></span>
+      </a>
+    </article>
 
-      <section class="glass-card">
-        <h2 class="card-heading">Quick Access</h2>
-        <p class="card-subtitle">Select an option to continue to your dashboard.</p>
+    <!-- WORKERS: no login -->
+    <article class="panel">
+      <div class="ph"><h2>Workers</h2>
+        <span class="tag"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polyline points="20 6 9 17 4 12"/></svg>No sign-in needed</span></div>
+      <p class="pd">Just your Aadhar number.<span class="hi" lang="hi"> सिर्फ़ आपका आधार नंबर।</span></p>
 
-        <div class="buttons">
+      <a class="tile teal" href="https://script.google.com/macros/s/AKfycbwF8kaUKPxajQdBIDMLLjPWK4vdA5_Y_yI2DHiqZYtdwymYK37oXAE4eYmitOdDsIjf/exec?page=book" target="_blank" rel="noopener noreferrer">
+        <span class="ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="3" y="4" width="18" height="18" rx="2"/><line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/><line x1="3" y1="10" x2="21" y2="10"/><polyline points="9 16 11 18 15 14"/></svg></span>
+        <span class="txt"><b>Book a training slot</b><span>Choose your date for each session</span><span class="hi" lang="hi">अपना प्रशिक्षण स्लॉट बुक करें</span></span>
+        <span class="go"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg></span>
+      </a>
 
-          <!-- ADMIN LOGIN -->
-          <a class="portal-btn primary"
-             href="https://script.google.com/macros/s/AKfycbwF8kaUKPxajQdBIDMLLjPWK4vdA5_Y_yI2DHiqZYtdwymYK37oXAE4eYmitOdDsIjf/exec"
-             target="_blank"
-             rel="noopener noreferrer">
+      <a class="tile teal" href="https://script.google.com/macros/s/AKfycbwF8kaUKPxajQdBIDMLLjPWK4vdA5_Y_yI2DHiqZYtdwymYK37oXAE4eYmitOdDsIjf/exec?page=status" target="_blank" rel="noopener noreferrer">
+        <span class="ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/><polyline points="9 15 11 17 15 13"/></svg></span>
+        <span class="txt"><b>Know your training status</b><span>See what is completed and pending</span><span class="hi" lang="hi">अपने प्रशिक्षण की स्थिति देखें</span></span>
+        <span class="go"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg></span>
+      </a>
+    </article>
 
-            <span class="btn-icon">
-              <svg viewBox="0 0 24 24" fill="none"
-                   stroke="currentColor" stroke-width="1.8"
-                   stroke-linecap="round" stroke-linejoin="round">
-                <rect x="4" y="10" width="16" height="11" rx="2"/>
-                <path d="M8 10V7a4 4 0 0 1 8 0v3"/>
-                <circle cx="12" cy="15" r="1"/>
-              </svg>
-            </span>
+  </section>
 
-            <span class="btn-text">
-              <span class="btn-title">Admin Login</span>
-              <span class="btn-sub">Access the main portal</span>
-            </span>
+  <p class="foot">Work safely. Learn continuously.</p>
+</main>
 
-            <span class="arrow" aria-hidden="true">→</span>
-          </a>
-
-          <!-- NOMINATION / BOOKING -->
-          <a class="portal-btn"
-             href="https://script.google.com/macros/s/AKfycbwF8kaUKPxajQdBIDMLLjPWK4vdA5_Y_yI2DHiqZYtdwymYK37oXAE4eYmitOdDsIjf/exec?page=book"
-             target="_blank"
-             rel="noopener noreferrer">
-
-            <span class="btn-icon">
-              <svg viewBox="0 0 24 24" fill="none"
-                   stroke="currentColor" stroke-width="1.8"
-                   stroke-linecap="round" stroke-linejoin="round">
-                <rect x="3" y="5" width="18" height="16" rx="2"/>
-                <path d="M16 3v4M8 3v4M3 10h18"/>
-                <path d="m9 15 2 2 4-4"/>
-              </svg>
-            </span>
-
-            <span class="btn-text">
-              <span class="btn-title">Nomination / Booking</span>
-              <span class="btn-sub">Book your training slot</span>
-            </span>
-
-            <span class="arrow" aria-hidden="true">→</span>
-          </a>
-
-          <!-- WORKER BOOKING STATUS -->
-          <a class="portal-btn"
-             href="https://script.google.com/macros/s/AKfycbwF8kaUKPxajQdBIDMLLjPWK4vdA5_Y_yI2DHiqZYtdwymYK37oXAE4eYmitOdDsIjf/exec?page=status"
-             target="_blank"
-             rel="noopener noreferrer">
-
-            <span class="btn-icon">
-              <svg viewBox="0 0 24 24" fill="none"
-                   stroke="currentColor" stroke-width="1.8"
-                   stroke-linecap="round" stroke-linejoin="round">
-                <rect x="5" y="3" width="14" height="18" rx="2"/>
-                <path d="M9 8h6M9 12h3"/>
-                <path d="m9 16 2 2 4-4"/>
-              </svg>
-            </span>
-
-            <span class="btn-text">
-              <span class="btn-title">Worker Booking Status</span>
-              <span class="btn-sub">Check your booking status</span>
-            </span>
-
-            <span class="arrow" aria-hidden="true">→</span>
-          </a>
-
-        </div>
-      </section>
-
-    </div>
-  </main>
-
-  <footer>
-    <span>© <span id="year"></span> Training Portal</span>
-    <span>Work safely. Learn continuously.</span>
-  </footer>
-
-  <script>
-    document.getElementById("year").textContent =
-      new Date().getFullYear();
-  </script>
-
+<script>
+(function(){
+  /* greeting */
+  var h=new Date().getHours();
+  document.getElementById('greet').textContent=h<12?'Good morning':(h<17?'Good afternoon':'Good evening');
+  /* light follows the cursor on each tile, soft parallax on the background glow (mouse only, once per frame) */
+  var RAF=0,lite=document.documentElement.classList.contains('lite'),aur=document.querySelector('.aur');
+  document.addEventListener('pointermove',function(e){
+    if(e.pointerType==='touch'||RAF||lite)return;
+    RAF=requestAnimationFrame(function(){RAF=0;});
+    var t=e.target.closest&&e.target.closest('.tile');
+    if(t){var r=t.getBoundingClientRect();t.style.setProperty('--mx',(e.clientX-r.left)+'px');t.style.setProperty('--my',(e.clientY-r.top)+'px');}
+    if(aur){aur.style.setProperty('--px',((e.clientX/innerWidth-.5)*-30).toFixed(1)+'px');aur.style.setProperty('--py',((e.clientY/innerHeight-.5)*-20).toFixed(1)+'px');}
+  },{passive:true});
+  /* tap ripple */
+  document.addEventListener('pointerdown',function(e){
+    var t=e.target.closest&&e.target.closest('.tile');if(!t)return;
+    var r=t.getBoundingClientRect(),d=Math.max(r.width,r.height)*1.5,s=document.createElement('span');
+    s.className='rip';s.style.cssText='width:'+d+'px;height:'+d+'px;left:'+(e.clientX-r.left-d/2)+'px;top:'+(e.clientY-r.top-d/2)+'px';
+    t.appendChild(s);setTimeout(function(){if(s.parentNode)s.parentNode.removeChild(s);},700);
+  },{passive:true});
+})();
+</script>
 </body>
 </html>
